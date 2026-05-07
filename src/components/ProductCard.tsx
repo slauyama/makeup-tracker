@@ -37,7 +37,7 @@ export default function ProductCard({
       <div className="p-4 flex flex-col gap-2 flex-1">
         <div className="flex justify-between items-start gap-2">
           <span
-            className={`text-xs font-medium px-2 py-0.5 rounded-full shrink-0 ${colorClass}`}
+            className={`text-xs font-medium px-2 py-0.5 rounded-full truncate min-w-0 ${colorClass}`}
           >
             {product.category}
           </span>
@@ -49,14 +49,14 @@ export default function ProductCard({
         </div>
 
         <div className="flex-1">
-          <h3 className="font-semibold text-gray-800 leading-tight">
+          <h3 className="font-semibold text-gray-800 leading-tight truncate">
             {product.name}
           </h3>
           {product.brand && (
-            <p className="text-sm text-gray-500 mt-0.5">{product.brand}</p>
+            <p className="text-sm text-gray-500 mt-0.5 truncate">{product.brand}</p>
           )}
           {product.shade && (
-            <p className="text-xs text-gray-400 mt-0.5">
+            <p className="text-xs text-gray-400 mt-0.5 truncate">
               Shade: {product.shade}
             </p>
           )}

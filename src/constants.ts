@@ -21,6 +21,7 @@ export enum Brand {
   NYX = "NYX",
   PatrickTA = "Patrick TA",
   RareBeauty = "Rare Beauty",
+  Sephora = "Sephora",
   Tarte = "Tarte",
   UrbanDecay = "Urban Decay",
   YSL = "YSL",
@@ -34,6 +35,7 @@ export enum Category {
   Bronzer = "Bronzer",
   Concealer = "Concealer",
   EyebrowPencil = "Eyebrow Pencil",
+  EyeCream = "Eye Cream",
   Eyeliner = "Eyeliner",
   Eyeshadow = "Eyeshadow",
   Foundation = "Foundation",
@@ -68,6 +70,7 @@ const OTHER = "bg-slate-100 text-slate-600";
 
 export const CATEGORY_COLORS: Record<Category, string> = {
   // Eye
+  "Eye Cream": EYE,
   Eyeshadow: EYE,
   Eyeliner: EYE,
   "Eyebrow Pencil": EYE,
@@ -93,3 +96,6 @@ export const CATEGORY_COLORS: Record<Category, string> = {
   // Other
   Other: OTHER,
 };
+
+// skin care
+// cosmetics

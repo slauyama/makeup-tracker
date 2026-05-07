@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "./ui/Button";
 import Heading from "./ui/Heading";
+import Input from "./ui/Input";
 import Modal from "./ui/Modal";
 import Select from "./ui/Select";
 import Text from "./ui/Text";
@@ -77,9 +78,6 @@ export default function AddProductModal({
     onSave(form);
   }
 
-  const input =
-    "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-rose-300";
-
   return (
     <Modal
       modalControls={modalControls}
@@ -103,13 +101,12 @@ export default function AddProductModal({
             <Text as="label" variant="label" className="block mb-1">
               Product Name <span className="text-rose-400">*</span>
             </Text>
-            <input
+            <Input
               type="text"
               required
               value={form.name}
               onChange={set("name")}
               placeholder="e.g. Soft Matte Foundation"
-              className={input}
             />
           </div>
 
@@ -146,24 +143,22 @@ export default function AddProductModal({
               <Text as="label" variant="label" className="block mb-1">
                 Shade / Color
               </Text>
-              <input
+              <Input
                 type="text"
                 value={form.shade}
                 onChange={set("shade")}
                 placeholder="e.g. 120W Warm Beige"
-                className={input}
               />
             </div>
             <div>
               <Text as="label" variant="label" className="block mb-1">
                 Size
               </Text>
-              <input
+              <Input
                 type="text"
                 value={form.size}
                 onChange={set("size")}
                 placeholder="e.g. 1 oz, 30ml"
-                className={input}
               />
             </div>
           </div>
@@ -174,31 +169,25 @@ export default function AddProductModal({
               <Text as="label" variant="label" className="block mb-1">
                 Date Bought
               </Text>
-              <input
+              <Input
                 type="date"
                 value={form.dateBought}
                 onChange={set("dateBought")}
-                className={input}
               />
             </div>
             <div>
               <Text as="label" variant="label" className="block mb-1">
                 Price
               </Text>
-              <div className="relative">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm select-none">
-                  $
-                </span>
-                <input
-                  type="text"
-                  inputMode="decimal"
-                  value={priceStr}
-                  onChange={(e) => setPriceStr(e.target.value)}
-                  onBlur={handlePriceBlur}
-                  placeholder="0.00"
-                  className={`${input} pl-6`}
-                />
-              </div>
+              <Input
+                prefix="$"
+                type="text"
+                inputMode="decimal"
+                value={priceStr}
+                onChange={(e) => setPriceStr(e.target.value)}
+                onBlur={handlePriceBlur}
+                placeholder="0.00"
+              />
             </div>
           </div>
 
@@ -208,25 +197,24 @@ export default function AddProductModal({
               <Text as="label" variant="label" className="block mb-1">
                 Store / Retailer
               </Text>
-              <input
+              <Input
                 type="text"
                 value={form.purchasedAt}
                 onChange={set("purchasedAt")}
                 placeholder="e.g. Sephora, Ulta"
-                className={input}
               />
             </div>
             <div>
               <Text as="label" variant="label" className="block mb-1">
                 Barcode
               </Text>
-              <input
+              <Input
                 type="text"
                 value={form.barcode}
                 onChange={set("barcode")}
                 placeholder="e.g. 3614272263955"
                 inputMode="numeric"
-                className={`${input} font-mono`}
+                className="font-mono"
               />
             </div>
           </div>
@@ -241,7 +229,7 @@ export default function AddProductModal({
               onChange={set("notes")}
               placeholder="Any notes about this product…"
               rows={2}
-              className={`${input} resize-none`}
+              className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-rose-300 resize-none"
             />
           </div>
 
@@ -250,12 +238,11 @@ export default function AddProductModal({
             <Text as="label" variant="label" className="block mb-1">
               Image URL
             </Text>
-            <input
+            <Input
               type="url"
               value={form.imageUrl}
               onChange={set("imageUrl")}
               placeholder="https://"
-              className={input}
             />
           </div>
 
@@ -263,12 +250,11 @@ export default function AddProductModal({
             <Text as="label" variant="label" className="block mb-1">
               Retailer Link
             </Text>
-            <input
+            <Input
               type="url"
               value={form.retailerUrl}
               onChange={set("retailerUrl")}
               placeholder="https://"
-              className={input}
             />
           </div>
 

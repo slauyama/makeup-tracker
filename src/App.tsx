@@ -61,7 +61,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-rose-50">
       <header className="bg-white shadow-sm sticky top-0 z-10">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+        <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
           <div>
             <Heading as="h1" variant="display" className="text-rose-500">
               Makeup Tracker
@@ -91,7 +91,7 @@ export default function App() {
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-4 py-6">
+      <main className="max-w-6xl mx-auto px-4 py-6">
         {showStats && <StatsView products={products} />}
 
         {!showStats && (
@@ -145,7 +145,7 @@ export default function App() {
                 )}
               </div>
             ) : (
-              <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+              <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 items-start">
                 {filtered.map((product) => (
                   <ProductCard
                     key={product.id}
