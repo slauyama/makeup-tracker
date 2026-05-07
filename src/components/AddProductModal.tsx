@@ -24,8 +24,8 @@ type FormEvent = React.ChangeEvent<
 
 const BLANK: ProductInput = {
   name: "",
-  category: Category.Blush,
-  brand: Brand.bareMinerals,
+  category: Category.MakeUp,
+  brand: Brand.BenefitCosmetics,
   shade: "",
   size: "",
   price: null,

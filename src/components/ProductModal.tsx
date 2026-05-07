@@ -21,8 +21,8 @@ interface ProductModalProps {
 
 const BLANK: ProductInput = {
   name: "",
-  category: Category.Blush,
-  brand: Brand.bareMinerals,
+  category: Category.MakeUp,
+  brand: Brand.BenefitCosmetics,
   shade: "",
   size: "",
   price: null,
@@ -89,7 +89,6 @@ type FormField = keyof ProductInput;
 type FormEvent = React.ChangeEvent<
   HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
 >;
-
 
 export default function ProductModal({
   product,

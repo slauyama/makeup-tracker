@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CATEGORY_COLORS, ProductStatus } from "../constants";
+import { ProductStatus } from "../constants";
 import { Product } from "../hooks/useProducts";
 
 interface ProductCardProps {
@@ -14,8 +14,6 @@ export default function ProductCard({
   onOpen,
 }: ProductCardProps) {
   const [imgBroken, setImgBroken] = useState(false);
-  const colorClass =
-    CATEGORY_COLORS[product.category] ?? CATEGORY_COLORS["Other"];
   const isFinished = product.status === ProductStatus.Finished;
   const showImage = product.imageUrl && !imgBroken;
 
@@ -35,18 +33,13 @@ export default function ProductCard({
         />
       )}
       <div className="p-4 flex flex-col gap-2 flex-1">
-        <div className="flex justify-between items-start gap-2">
-          <span
-            className={`text-xs font-medium px-2 py-0.5 rounded-full truncate min-w-0 ${colorClass}`}
-          >
-            {product.category}
-          </span>
-          {isFinished && (
+        {isFinished && (
+          <div>
             <span className="text-xs bg-gray-100 text-gray-400 px-2 py-0.5 rounded-full">
               Finished
             </span>
-          )}
-        </div>
+          </div>
+        )}
 
         <div className="flex-1">
           <h3 className="font-semibold text-gray-800 leading-tight truncate">
