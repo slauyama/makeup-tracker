@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { ProductStatus, ALL_BRANDS, Brand, Category } from "../constants";
-import type { Product, ProductInput } from "../hooks/useProducts";
-import { ModalControls, useModal } from "../hooks/useModal";
+import { ProductStatus, ALL_BRANDS, Brand, Category } from "../../constants";
+import type { Product, ProductInput } from "../../hooks/useProducts";
+import { ModalControls, useModal } from "../../hooks/useModal";
 import {
   Button,
   ConfirmModal,
@@ -10,9 +10,9 @@ import {
   Modal,
   Select,
   Text,
-} from "./ui/UI";
+} from "../ui/UI";
 
-import AmazonIcon from "../assets/amazon_icon.png";
+import AmazonIcon from "../../assets/amazon_icon.png";
 
 interface ProductModalProps {
   categories: string[];

@@ -4,7 +4,6 @@
 
 ### High
 
-- Add login view
 - Use firebase for nosql db
 - Fix scroll bar on modal
 - Fix dark mode colors.
@@ -16,7 +15,6 @@
   - Save should have a intermission screen
   - Should abide by useLessMotion
   - Hover on buttons
-  - Transitions on product card
   - Shadow of product card fade in and out
 
 ### Low

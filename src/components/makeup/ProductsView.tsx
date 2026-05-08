@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { ProductStatus, ALL_CATEGORIES } from "../constants";
-import type { Product, ProductInput } from "../hooks/useProducts";
-import { useModal } from "../hooks/useModal";
+import { ProductStatus, ALL_CATEGORIES } from "../../constants";
+import type { Product, ProductInput } from "../../hooks/useProducts";
+import { useModal } from "../../hooks/useModal";
 import AddProductModal from "./AddProductModal";
 import ImportExportModal from "./ImportExportModal";
 import ProductCard from "./ProductCard";
 import ProductModal from "./ProductModal";
-import { Button, IconButton, Select, Text } from "./ui/UI";
+import { Button, IconButton, Select, Text } from "../ui/UI";
 import { AnimatePresence } from "framer-motion";
 
 interface ProductsViewProps {
