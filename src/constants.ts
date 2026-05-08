@@ -2,7 +2,9 @@
 export enum Brand {
   BenefitCosmetics = "Benefit Cosmetics",
   CharlotteTilbury = "Charlotte Tilbury",
+  EltaMD = "Elta MD",
   Farmacy = "Farmacy",
+  Frownies = "Frownies",
   Hourglass = "Hourglass",
   Kiehls = "Kiehls",
   LauraMercier = "Laura Mercier",
@@ -13,6 +15,7 @@ export enum Brand {
   Sephora = "Sephora",
   Tarte = "Tarte",
   TheOrdinary = "The Ordinary",
+  Other = "Other",
 }
 
 export const ALL_BRANDS = Object.values(Brand);
@@ -22,6 +25,7 @@ export enum Category {
   MakeUp = "Make-Up",
   Skin = "Skin",
   Tools = "Tools",
+  Other = "Other",
 }
 
 export const ALL_CATEGORIES = Object.values(Category);

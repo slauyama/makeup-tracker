@@ -24,6 +24,38 @@ const STATUS_FILTERS: Array<ProductStatus | "all"> = [
   ProductStatus.Finished,
 ];
 
+type SortField = "dateBought" | "price" | "createdAt";
+type SortDir = "asc" | "desc";
+
+const SORT_OPTIONS = [
+  { value: "dateBought", label: "Date Bought" },
+  { value: "price", label: "Cost" },
+];
+
+function sortProducts(
+  products: Product[],
+  field: SortField,
+  dir: SortDir,
+): Product[] {
+  return [...products].sort((a, b) => {
+    let cmp = 0;
+    if (field === "price") {
+      if (a.price == null && b.price == null) cmp = 0;
+      else if (a.price == null) return 1;
+      else if (b.price == null) return -1;
+      else cmp = a.price - b.price;
+    } else {
+      const av = a[field];
+      const bv = b[field];
+      if (!av && !bv) cmp = 0;
+      else if (!av) return 1;
+      else if (!bv) return -1;
+      else cmp = av < bv ? -1 : av > bv ? 1 : 0;
+    }
+    return dir === "asc" ? cmp : -cmp;
+  });
+}
+
 export default function App() {
   const {
     products,
@@ -42,16 +74,22 @@ export default function App() {
     "all",
   );
   const [categoryFilter, setCategoryFilter] = useState("all");
+  const [sortField, setSortField] = useState<SortField>("createdAt");
+  const [sortDir, setSortDir] = useState<SortDir>("desc");
 
   const activeCount = products.filter(
     (p) => p.status === ProductStatus.Active,
   ).length;
 
-  const filtered = products.filter((p) => {
-    const statusOk = statusFilter === "all" || p.status === statusFilter;
-    const catOk = categoryFilter === "all" || p.category === categoryFilter;
-    return statusOk && catOk;
-  });
+  const filtered = sortProducts(
+    products.filter((p) => {
+      const statusOk = statusFilter === "all" || p.status === statusFilter;
+      const catOk = categoryFilter === "all" || p.category === categoryFilter;
+      return statusOk && catOk;
+    }),
+    sortField,
+    sortDir,
+  );
 
   // Always pass the freshest copy of the open product to ProductModal
   const liveProduct = activeProduct
@@ -83,10 +121,14 @@ export default function App() {
               variant="secondary"
               size="sm"
               onClick={importExportModal.open}
+              className="hidden sm:inline-flex"
             >
               Import / Export
             </Button>
-            <Button onClick={addProductModal.open}>+ Add Product</Button>
+            <Button onClick={addProductModal.open}>
+              <span className="sm:hidden">+ Add</span>
+              <span className="hidden sm:inline">+ Add Product</span>
+            </Button>
           </div>
         </div>
       </header>
@@ -115,6 +157,23 @@ export default function App() {
                 onChange={(e) => setCategoryFilter(e.target.value)}
                 options={CATEGORY_OPTIONS}
               />
+
+              <div className="w-px h-5 bg-gray-200 mx-1" />
+
+              <Select
+                value={sortField}
+                onChange={(e) => setSortField(e.target.value as SortField)}
+                options={SORT_OPTIONS}
+              />
+              <button
+                onClick={() =>
+                  setSortDir((d) => (d === "asc" ? "desc" : "asc"))
+                }
+                className="text-sm text-gray-500 hover:text-gray-700 px-2 py-1 rounded-lg hover:bg-gray-100 transition"
+                title={sortDir === "asc" ? "Ascending" : "Descending"}
+              >
+                {sortDir === "asc" ? "↑" : "↓"}
+              </button>
             </div>
 
             {filtered.length === 0 ? (
