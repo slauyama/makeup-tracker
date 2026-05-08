@@ -6,14 +6,19 @@
 
 - Add login view
 - Use firebase for nosql db
+- Fix dark mode colors.
+  - Red button should be different
+  - Fix button variants and color
+  - Add white background on product card images to fix transparency issues
 - Transitions / Animations
+  - Swap view in product card
+  - Save should have a intermission screen
   - Should abide by useLessMotion
   - Hover on buttons
   - Transitions on product card
   - add Sort label - switch button should rotate instead of swappign
   - Modal fade in fade out
-  - Swap view in product card
-  - Save should have a intermission screen
+
   - Mark finish vs mark active fade in
   - Shadow of product card fade in and out
 
