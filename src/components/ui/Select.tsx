@@ -39,7 +39,16 @@ export default function Select({
   ...props
 }: SelectProps) {
   const select = (
-    <select
+
+  );
+
+  if (label) {
+    return (
+      <div>
+        <Text as="label" variant="label" className="block mb-1">
+          {label}
+        </Text>
+            <select
       value={value}
       onChange={onChange}
       className={[BASE, VARIANTS[variant], className].filter(Boolean).join(" ")}
@@ -56,15 +65,6 @@ export default function Select({
         );
       })}
     </select>
-  );
-
-  if (label) {
-    return (
-      <div>
-        <Text as="label" variant="label" className="block mb-1">
-          {label}
-        </Text>
-        {select}
       </div>
     );
   }
