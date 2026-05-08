@@ -7,6 +7,7 @@ import ImportExportModal from "./ImportExportModal";
 import ProductCard from "./ProductCard";
 import ProductModal from "./ProductModal";
 import { Button, IconButton, Select, Text } from "./ui/UI";
+import { AnimatePresence } from "framer-motion";
 
 interface ProductsViewProps {
   products: Product[];
@@ -188,16 +189,20 @@ export default function ProductsView({
         </div>
       ) : (
         <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 items-start">
-          {filtered.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onClick={() => {
-                productModal.open();
-                setActiveProduct(product);
-              }}
-            />
-          ))}
+          <AnimatePresence>
+            {filtered.map((product, index, products) => (
+              <ProductCard
+                key={product.id}
+                index={index}
+                totalProducts={products.length}
+                product={product}
+                onClick={() => {
+                  productModal.open();
+                  setActiveProduct(product);
+                }}
+              />
+            ))}
+          </AnimatePresence>
         </div>
       )}
 

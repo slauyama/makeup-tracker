@@ -12,12 +12,11 @@
   - Fix button variants and color
   - Add white background on product card images to fix transparency issues
 - Transitions / Animations
-  - Swap view in product card
+  - Use framer motion
   - Save should have a intermission screen
   - Should abide by useLessMotion
   - Hover on buttons
   - Transitions on product card
-  - Mark finish vs mark active fade in
   - Shadow of product card fade in and out
 
 ### Low
