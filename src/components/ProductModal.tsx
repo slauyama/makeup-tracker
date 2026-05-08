@@ -361,7 +361,7 @@ export default function ProductModal({
                   >
                     <svg
                       viewBox="0 0 24 20"
-                      className="h-4 w-auto fill-current text-rose-500"
+                      className="h-4 w-auto fill-current text-black dark:text-white"
                       aria-hidden="true"
                     >
                       <rect x="0" y="0" width="1.5" height="20" />
