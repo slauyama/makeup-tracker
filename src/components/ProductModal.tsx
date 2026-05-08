@@ -4,7 +4,6 @@ import type { Product, ProductInput } from "../hooks/useProducts";
 import { useModal } from "../hooks/useModal";
 import Button from "./ui/Button";
 import ConfirmModal from "./ui/ConfirmModal";
-import Heading from "./ui/Heading";
 import Input from "./ui/Input";
 import Link from "./ui/Link";
 import Modal from "./ui/Modal";
@@ -145,23 +144,14 @@ export default function ProductModal({
     <>
       <Modal
         modalControls={modalControls}
+        title={editing ? "Edit Product" : product.name}
+        subtitle={!editing && product.brand ? product.brand : undefined}
+        onClose={editing ? () => setEditing(false) : onClose}
         closeOnBackdrop={!editing}
         className="max-h-[90vh] overflow-y-auto"
       >
         {editing ? (
           <div className="p-6">
-            <div className="flex justify-between items-center mb-5">
-              <Heading as="h2" variant="title">
-                Edit Product
-              </Heading>
-              <button
-                onClick={() => setEditing(false)}
-                className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 text-2xl leading-none"
-              >
-                &times;
-              </button>
-            </div>
-
             <form onSubmit={handleSave} className="space-y-4">
               <Input
                 label="Product Name"
@@ -289,37 +279,20 @@ export default function ProductModal({
               </div>
 
               <div className="pt-1 border-t border-zinc-100 dark:border-zinc-700">
-                <button
+                <Button
+                  variant="ghost"
+                  color="destructive"
                   type="button"
                   onClick={confirmDeleteModal.open}
-                  className="w-full py-2 text-sm font-medium text-red-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950 rounded-lg transition"
+                  className="w-full"
                 >
                   Delete Product
-                </button>
+                </Button>
               </div>
             </form>
           </div>
         ) : (
           <div className="p-6 flex flex-col gap-4">
-            <div className="flex justify-between items-start gap-2">
-              <div className="flex-1">
-                <Heading as="h2" variant="title">
-                  {product.name}
-                </Heading>
-                {product.brand && (
-                  <Text variant="muted" className="mt-0.5">
-                    {product.brand}
-                  </Text>
-                )}
-              </div>
-              <button
-                onClick={onClose}
-                className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 text-2xl leading-none shrink-0"
-              >
-                &times;
-              </button>
-            </div>
-
             {product.imageUrl && <ProductImage url={product.imageUrl} />}
 
             <div className="grid grid-cols-2 gap-x-4 gap-y-3">
@@ -407,21 +380,19 @@ export default function ProductModal({
             </div>
 
             <div className="flex gap-3 pt-1">
-              <button
-                onClick={(_e) => {
+              <Button
+                variant={isFinished ? "ghost" : "secondary"}
+                size="xs"
+                className="flex-1"
+                onClick={() =>
                   updateProductStatus(
                     product.id,
                     isFinished ? ProductStatus.Active : ProductStatus.Finished,
-                  );
-                }}
-                className={
-                  isFinished
-                    ? "flex-1 text-xs bg-zinc-50 dark:bg-zinc-700 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-600 px-2 py-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-600 transition"
-                    : "flex-1 text-xs bg-rose-50 dark:bg-rose-950 text-rose-500 border border-rose-200 dark:border-rose-800 px-2 py-1.5 rounded-lg hover:bg-rose-100 dark:hover:bg-rose-900 transition"
+                  )
                 }
               >
                 Mark {isFinished ? "Active" : "Finished"}
-              </button>
+              </Button>
               <Button onClick={startEditing} className="flex-1">
                 Edit
               </Button>

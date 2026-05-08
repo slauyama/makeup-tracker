@@ -1,6 +1,5 @@
 import { ModalControls } from "../../hooks/useModal";
 import Button from "./Button";
-import Heading from "./Heading";
 import Modal from "./Modal";
 import Text from "./Text";
 
@@ -20,11 +19,8 @@ export default function ConfirmModal({
   onConfirm,
 }: ConfirmModalProps) {
   return (
-    <Modal modalControls={modalControls} closeOnBackdrop>
+    <Modal modalControls={modalControls} title={title} closeOnBackdrop>
       <div className="p-6 flex flex-col gap-4">
-        <Heading as="h2" variant="title">
-          {title}
-        </Heading>
         <Text variant="body">{message}</Text>
         <div className="flex gap-3 pt-1">
           <Button
@@ -34,15 +30,17 @@ export default function ConfirmModal({
           >
             Cancel
           </Button>
-          <button
+          <Button
+            variant="primary"
+            color="destructive"
             onClick={() => {
               onConfirm();
               modalControls.close();
             }}
-            className="flex-1 px-4 py-2 text-sm font-medium text-white bg-red-500 hover:bg-red-600 rounded-lg transition"
+            className="flex-1"
           >
             {confirmLabel}
-          </button>
+          </Button>
         </div>
       </div>
     </Modal>

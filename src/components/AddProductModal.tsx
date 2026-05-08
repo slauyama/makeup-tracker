@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Button from "./ui/Button";
-import Heading from "./ui/Heading";
 import Input from "./ui/Input";
 import Modal from "./ui/Modal";
 import Select from "./ui/Select";
@@ -79,21 +78,10 @@ export default function AddProductModal({
   return (
     <Modal
       modalControls={modalControls}
+      title={isEdit ? "Edit Product" : "Add Product"}
       className="max-h-[90vh] overflow-y-auto"
     >
       <div className="p-6">
-        <div className="flex justify-between items-center mb-5">
-          <Heading as="h2" variant="title">
-            {isEdit ? "Edit Product" : "Add Product"}
-          </Heading>
-          <button
-            onClick={modalControls.close}
-            className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 text-2xl leading-none"
-          >
-            &times;
-          </button>
-        </div>
-
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
             label="Product Name"
@@ -222,13 +210,15 @@ export default function AddProductModal({
 
           {onDelete && (
             <div className="pt-1 border-t border-zinc-100 dark:border-zinc-700">
-              <button
+              <Button
+                variant="ghost"
+                color="destructive"
                 type="button"
                 onClick={onDelete}
-                className="w-full py-2 text-sm font-medium text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
+                className="w-full"
               >
                 Delete Product
-              </button>
+              </Button>
             </div>
           )}
         </form>

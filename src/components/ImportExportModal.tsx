@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Product } from "../hooks/useProducts";
 import Button from "./ui/Button";
+import DropzoneButton from "./DropzoneButton";
 import Heading from "./ui/Heading";
 import Modal from "./ui/Modal";
 import Text from "./ui/Text";
@@ -69,20 +70,8 @@ export default function ImportExportModal({
   }
 
   return (
-    <Modal modalControls={modalControls}>
+    <Modal modalControls={modalControls} title="Import / Export">
       <div className="p-6 flex flex-col gap-5">
-        <div className="flex justify-between items-center">
-          <Heading as="h2" variant="title">
-            Import / Export
-          </Heading>
-          <button
-            onClick={modalControls.close}
-            className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 text-2xl leading-none"
-          >
-            &times;
-          </button>
-        </div>
-
         <div className="flex flex-col gap-2">
           <Heading as="h3" variant="subtitle">
             Export
@@ -114,15 +103,14 @@ export default function ImportExportModal({
             Load products from a previously exported JSON file.
           </Text>
 
-          <button
+          <DropzoneButton
             type="button"
             onClick={() => fileRef.current?.click()}
-            className="w-full border-2 border-dashed border-zinc-200 dark:border-zinc-600 rounded-lg px-4 py-6 text-sm text-zinc-400 hover:border-rose-300 hover:text-rose-400 transition-colors text-center"
           >
             {preview
               ? `✓ ${preview.length} product${preview.length !== 1 ? "s" : ""} ready to import`
               : "Click to choose a .json file"}
-          </button>
+          </DropzoneButton>
           <input
             ref={fileRef}
             type="file"
@@ -139,34 +127,30 @@ export default function ImportExportModal({
 
           {preview && (
             <div className="flex gap-2">
-              <button
+              <Button
+                variant={mode === "merge" ? "secondary" : "ghost"}
+                size="none"
                 type="button"
                 onClick={() => setMode("merge")}
-                className={`flex-1 text-xs px-3 py-2 rounded-lg border transition ${
-                  mode === "merge"
-                    ? "bg-rose-50 dark:bg-rose-950 border-rose-300 dark:border-rose-800 text-rose-600 dark:text-rose-400 font-medium"
-                    : "border-zinc-200 dark:border-zinc-600 text-zinc-500 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-500"
-                }`}
+                className="flex-1 flex-col items-start text-xs px-3 py-2"
               >
                 Merge
-                <span className="block font-normal text-zinc-400 mt-0.5">
+                <span className="font-normal text-zinc-400 mt-0.5">
                   Add new, keep existing
                 </span>
-              </button>
-              <button
+              </Button>
+              <Button
+                variant={mode === "replace" ? "secondary" : "ghost"}
+                size="none"
                 type="button"
                 onClick={() => setMode("replace")}
-                className={`flex-1 text-xs px-3 py-2 rounded-lg border transition ${
-                  mode === "replace"
-                    ? "bg-rose-50 dark:bg-rose-950 border-rose-300 dark:border-rose-800 text-rose-600 dark:text-rose-400 font-medium"
-                    : "border-zinc-200 dark:border-zinc-600 text-zinc-500 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-500"
-                }`}
+                className="flex-1 flex-col items-start text-xs px-3 py-2"
               >
                 Replace
-                <span className="block font-normal text-zinc-400 mt-0.5">
+                <span className="font-normal text-zinc-400 mt-0.5">
                   Overwrite all current data
                 </span>
-              </button>
+              </Button>
             </div>
           )}
 
