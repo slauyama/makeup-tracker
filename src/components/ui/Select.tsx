@@ -1,4 +1,5 @@
 import { SelectHTMLAttributes } from "react";
+import Text from "./Text";
 
 type SelectOption = string | { value: string; label: string };
 type Variant = "default" | "pill";
@@ -11,6 +12,7 @@ interface SelectProps extends Omit<
   options: SelectOption[];
   placeholder?: string;
   variant?: Variant;
+  label?: string;
 }
 
 const BASE =
@@ -32,10 +34,11 @@ export default function Select({
   options,
   placeholder,
   variant = "default",
+  label,
   className = "",
   ...props
 }: SelectProps) {
-  return (
+  const select = (
     <select
       value={value}
       onChange={onChange}
@@ -45,13 +48,26 @@ export default function Select({
       {placeholder && <option value="">{placeholder}</option>}
       {options.map((opt) => {
         const val = typeof opt === "string" ? opt : opt.value;
-        const label = typeof opt === "string" ? opt : opt.label;
+        const optLabel = typeof opt === "string" ? opt : opt.label;
         return (
           <option key={val} value={val}>
-            {label}
+            {optLabel}
           </option>
         );
       })}
     </select>
   );
+
+  if (label) {
+    return (
+      <div>
+        <Text as="label" variant="label" className="block mb-1">
+          {label}
+        </Text>
+        {select}
+      </div>
+    );
+  }
+
+  return select;
 }

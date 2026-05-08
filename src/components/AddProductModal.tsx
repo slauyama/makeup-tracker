@@ -39,8 +39,6 @@ const BLANK: ProductInput = {
 
 function toInput(product: Product): ProductInput {
   const { id: _id, status: _status, createdAt: _createdAt, ...rest } = product;
-  // Spread BLANK first so any fields added after a product was created
-  // (e.g. purchasedAt on old records) default to empty string.
   return { ...BLANK, ...rest };
 }
 
@@ -90,136 +88,95 @@ export default function AddProductModal({
           </Heading>
           <button
             onClick={modalControls.close}
-            className="text-gray-400 hover:text-gray-600 text-2xl leading-none"
+            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 text-2xl leading-none"
           >
             &times;
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <Text as="label" variant="label" className="block mb-1">
-              Product Name <span className="text-rose-400">*</span>
-            </Text>
-            <Input
-              type="text"
-              required
-              value={form.name}
-              onChange={set("name")}
-              placeholder="e.g. Soft Matte Foundation"
+          <Input
+            label="Product Name"
+            type="text"
+            required
+            value={form.name}
+            onChange={set("name")}
+            placeholder="e.g. Soft Matte Foundation"
+          />
+
+          <div className="grid grid-cols-2 gap-3">
+            <Select
+              label="Brand"
+              value={form.brand}
+              onChange={set("brand")}
+              options={ALL_BRANDS}
+              placeholder="Select brand…"
+              className="w-full"
+            />
+            <Select
+              label="Category"
+              value={form.category}
+              onChange={set("category")}
+              options={categories}
+              className="w-full"
             />
           </div>
 
-          {/* Brand + Category */}
           <div className="grid grid-cols-2 gap-3">
-            <div>
-              <Text as="label" variant="label" className="block mb-1">
-                Brand
-              </Text>
-              <Select
-                value={form.brand}
-                onChange={set("brand")}
-                options={ALL_BRANDS}
-                placeholder="Select brand…"
-                className="w-full"
-              />
-            </div>
-            <div>
-              <Text as="label" variant="label" className="block mb-1">
-                Category
-              </Text>
-              <Select
-                value={form.category}
-                onChange={set("category")}
-                options={categories}
-                className="w-full"
-              />
-            </div>
+            <Input
+              label="Shade / Color"
+              type="text"
+              value={form.shade}
+              onChange={set("shade")}
+              placeholder="e.g. 120W Warm Beige"
+            />
+            <Input
+              label="Size"
+              type="text"
+              value={form.size}
+              onChange={set("size")}
+              placeholder="e.g. 1 oz, 30ml"
+            />
           </div>
 
-          {/* Shade + Size */}
           <div className="grid grid-cols-2 gap-3">
-            <div>
-              <Text as="label" variant="label" className="block mb-1">
-                Shade / Color
-              </Text>
-              <Input
-                type="text"
-                value={form.shade}
-                onChange={set("shade")}
-                placeholder="e.g. 120W Warm Beige"
-              />
-            </div>
-            <div>
-              <Text as="label" variant="label" className="block mb-1">
-                Size
-              </Text>
-              <Input
-                type="text"
-                value={form.size}
-                onChange={set("size")}
-                placeholder="e.g. 1 oz, 30ml"
-              />
-            </div>
+            <Input
+              label="Date Bought"
+              type="date"
+              value={form.dateBought}
+              onChange={set("dateBought")}
+            />
+            <Input
+              label="Price"
+              prefix="$"
+              type="text"
+              inputMode="decimal"
+              value={priceStr}
+              onChange={(e) => setPriceStr(e.target.value)}
+              onBlur={handlePriceBlur}
+              placeholder="0.00"
+            />
           </div>
 
-          {/* Date Bought + Price */}
           <div className="grid grid-cols-2 gap-3">
-            <div>
-              <Text as="label" variant="label" className="block mb-1">
-                Date Bought
-              </Text>
-              <Input
-                type="date"
-                value={form.dateBought}
-                onChange={set("dateBought")}
-              />
-            </div>
-            <div>
-              <Text as="label" variant="label" className="block mb-1">
-                Price
-              </Text>
-              <Input
-                prefix="$"
-                type="text"
-                inputMode="decimal"
-                value={priceStr}
-                onChange={(e) => setPriceStr(e.target.value)}
-                onBlur={handlePriceBlur}
-                placeholder="0.00"
-              />
-            </div>
+            <Input
+              label="Store / Retailer"
+              type="text"
+              value={form.purchasedAt}
+              onChange={set("purchasedAt")}
+              placeholder="e.g. Sephora, Ulta"
+            />
+            <Input
+              label="Barcode"
+              type="text"
+              value={form.barcode}
+              onChange={set("barcode")}
+              placeholder="e.g. 3614272263955"
+              inputMode="numeric"
+              className="font-mono"
+            />
           </div>
 
-          {/* Store / Barcode */}
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <Text as="label" variant="label" className="block mb-1">
-                Store / Retailer
-              </Text>
-              <Input
-                type="text"
-                value={form.purchasedAt}
-                onChange={set("purchasedAt")}
-                placeholder="e.g. Sephora, Ulta"
-              />
-            </div>
-            <div>
-              <Text as="label" variant="label" className="block mb-1">
-                Barcode
-              </Text>
-              <Input
-                type="text"
-                value={form.barcode}
-                onChange={set("barcode")}
-                placeholder="e.g. 3614272263955"
-                inputMode="numeric"
-                className="font-mono"
-              />
-            </div>
-          </div>
-
-          {/* Notes */}
           <div>
             <Text as="label" variant="label" className="block mb-1">
               Notes
@@ -229,34 +186,25 @@ export default function AddProductModal({
               onChange={set("notes")}
               placeholder="Any notes about this product…"
               rows={2}
-              className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-rose-300 resize-none"
+              className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-rose-300 resize-none dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-500"
             />
           </div>
 
-          {/* Image URL */}
-          <div>
-            <Text as="label" variant="label" className="block mb-1">
-              Image URL
-            </Text>
-            <Input
-              type="url"
-              value={form.imageUrl}
-              onChange={set("imageUrl")}
-              placeholder="https://"
-            />
-          </div>
+          <Input
+            label="Image URL"
+            type="url"
+            value={form.imageUrl}
+            onChange={set("imageUrl")}
+            placeholder="https://"
+          />
 
-          <div>
-            <Text as="label" variant="label" className="block mb-1">
-              Retailer Link
-            </Text>
-            <Input
-              type="url"
-              value={form.retailerUrl}
-              onChange={set("retailerUrl")}
-              placeholder="https://"
-            />
-          </div>
+          <Input
+            label="Retailer Link"
+            type="url"
+            value={form.retailerUrl}
+            onChange={set("retailerUrl")}
+            placeholder="https://"
+          />
 
           <div className="flex gap-3 pt-2">
             <Button
@@ -273,7 +221,7 @@ export default function AddProductModal({
           </div>
 
           {onDelete && (
-            <div className="pt-1 border-t border-gray-100">
+            <div className="pt-1 border-t border-gray-100 dark:border-gray-700">
               <button
                 type="button"
                 onClick={onDelete}
