@@ -4,15 +4,10 @@ import { Product } from "../hooks/useProducts";
 
 interface ProductCardProps {
   product: Product;
-  updateProductStatus: (id: string, status: ProductStatus) => void;
   onOpen: () => void;
 }
 
-export default function ProductCard({
-  product,
-  updateProductStatus,
-  onOpen,
-}: ProductCardProps) {
+export default function ProductCard({ product, onOpen }: ProductCardProps) {
   const [imgBroken, setImgBroken] = useState(false);
   const isFinished = product.status === ProductStatus.Finished;
   const showImage = product.imageUrl && !imgBroken;

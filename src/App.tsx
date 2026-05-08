@@ -29,6 +29,7 @@ type SortDir = "asc" | "desc";
 
 const SORT_OPTIONS = [
   { value: "dateBought", label: "Date Bought" },
+  { value: "brand", label: "Brand" },
   { value: "price", label: "Cost" },
 ];
 
