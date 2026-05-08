@@ -47,7 +47,7 @@ export default function Modal({
       onClick={closeOnBackdrop ? handleClose : undefined}
     >
       <div
-        className={`bg-white dark:bg-zinc-800 rounded-2xl shadow-xl w-full max-w-md transition-all duration-300 transform ${modalControls.isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"} ${className}`}
+        className={`bg-white dark:bg-zinc-800 rounded-2xl shadow-xl w-full max-w-lg transition-all duration-300 transform ${modalControls.isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"} ${className}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-start px-6 pt-5">
