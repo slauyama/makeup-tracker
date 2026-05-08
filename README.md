@@ -17,7 +17,6 @@
   - Should abide by useLessMotion
   - Hover on buttons
   - Transitions on product card
-  - Modal fade in fade out
   - Mark finish vs mark active fade in
   - Shadow of product card fade in and out
 

@@ -1,9 +1,5 @@
 import { useState } from "react";
-import Button from "./ui/Button";
-import Input from "./ui/Input";
-import Modal from "./ui/Modal";
-import Select from "./ui/Select";
-import Text from "./ui/Text";
+import { Button, Input, Modal, Select, Text } from "./ui/UI";
 import { ALL_BRANDS, Brand, Category } from "../constants";
 import type { Product, ProductInput } from "../hooks/useProducts";
 import { ModalControls } from "../hooks/useModal";

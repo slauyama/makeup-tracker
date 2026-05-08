@@ -1,23 +1,27 @@
 import { useState } from "react";
 import { ProductStatus, ALL_BRANDS, Brand, Category } from "../constants";
 import type { Product, ProductInput } from "../hooks/useProducts";
-import { useModal } from "../hooks/useModal";
-import Button from "./ui/Button";
-import ConfirmModal from "./ui/ConfirmModal";
-import Input from "./ui/Input";
-import Link from "./ui/Link";
-import Modal from "./ui/Modal";
-import Select from "./ui/Select";
-import Text from "./ui/Text";
+import { ModalControls, useModal } from "../hooks/useModal";
+import {
+  Button,
+  ConfirmModal,
+  Input,
+  Link,
+  Modal,
+  Select,
+  Text,
+} from "./ui/UI";
+
 import AmazonIcon from "../assets/amazon_icon.png";
 
 interface ProductModalProps {
-  product: Product | null;
-  onClose: () => void;
-  onSave: (data: ProductInput) => void;
-  onDelete: () => void;
-  updateProductStatus: (id: string, status: ProductStatus) => void;
   categories: string[];
+  modalControls: ModalControls;
+  onClose: () => void;
+  onDelete: () => void;
+  onSave: (data: ProductInput) => void;
+  product: Product | null;
+  updateProductStatus: (id: string, status: ProductStatus) => void;
 }
 
 const BLANK: ProductInput = {
@@ -92,28 +96,20 @@ type FormEvent = React.ChangeEvent<
 >;
 
 export default function ProductModal({
-  product,
-  onClose,
-  onSave,
-  onDelete,
-  updateProductStatus,
   categories,
+  modalControls,
+  onClose,
+  onDelete,
+  onSave,
+  product,
+  updateProductStatus,
 }: ProductModalProps) {
   const [editing, setEditing] = useState(false);
   const confirmDeleteModal = useModal();
   const [form, setForm] = useState<ProductInput>({ ...BLANK });
   const [priceStr, setPriceStr] = useState("");
 
-  const modalControls = {
-    isOpen: product !== null,
-    open: () => {},
-    close: onClose,
-  };
-
-  if (!product) return null;
-
-  const isFinished = product.status === ProductStatus.Finished;
-  const amazonSearchUrl = buildAmazonSearchUrl(product);
+  const isFinished = product?.status === ProductStatus.Finished;
 
   function startEditing() {
     setForm(toInput(product!));
@@ -144,153 +140,169 @@ export default function ProductModal({
     <>
       <Modal
         modalControls={modalControls}
-        title={editing ? "Edit Product" : product.name}
-        subtitle={!editing && product.brand ? product.brand : undefined}
-        onClose={editing ? () => setEditing(false) : onClose}
+        title={editing ? "Edit Product" : (product?.name ?? "")}
+        subtitle={!editing && product?.brand ? product?.brand : undefined}
+        onClose={() => {
+          setTimeout(() => {
+            setEditing(false);
+            onClose();
+          }, 0);
+        }}
         closeOnBackdrop={!editing}
         className="max-h-[90vh] overflow-y-auto"
       >
-        {editing ? (
-          <div className="p-6">
-            <form onSubmit={handleSave} className="space-y-4">
-              <Input
-                label="Product Name"
-                type="text"
-                required
-                value={form.name}
-                onChange={set("name")}
-                placeholder="e.g. Soft Matte Foundation"
-              />
-
-              <div className="grid grid-cols-2 gap-3">
-                <Select
-                  label="Brand"
-                  value={form.brand}
-                  onChange={set("brand")}
-                  options={ALL_BRANDS}
-                  placeholder="Select brand…"
-                  className="w-full"
-                />
-                <Select
-                  label="Category"
-                  value={form.category}
-                  onChange={set("category")}
-                  options={categories}
-                  className="w-full"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
+        {product === null ? (
+          ""
+        ) : editing ? (
+          <>
+            <div className="p-6">
+              <form onSubmit={handleSave} className="space-y-4">
                 <Input
-                  label="Shade / Color"
+                  label="Product Name"
                   type="text"
-                  value={form.shade}
-                  onChange={set("shade")}
-                  placeholder="e.g. 120W Warm Beige"
+                  required
+                  value={form.name}
+                  onChange={set("name")}
+                  placeholder="e.g. Soft Matte Foundation"
                 />
+
+                <div className="grid grid-cols-2 gap-3">
+                  <Select
+                    label="Brand"
+                    value={form.brand}
+                    onChange={set("brand")}
+                    options={ALL_BRANDS}
+                    placeholder="Select brand…"
+                    className="w-full"
+                  />
+                  <Select
+                    label="Category"
+                    value={form.category}
+                    onChange={set("category")}
+                    options={categories}
+                    className="w-full"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <Input
+                    label="Shade / Color"
+                    type="text"
+                    value={form.shade}
+                    onChange={set("shade")}
+                    placeholder="e.g. 120W Warm Beige"
+                  />
+                  <Input
+                    label="Size"
+                    type="text"
+                    value={form.size}
+                    onChange={set("size")}
+                    placeholder="e.g. 1 oz, 30ml"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <Input
+                    label="Date Bought"
+                    type="date"
+                    value={form.dateBought}
+                    onChange={set("dateBought")}
+                  />
+                  <Input
+                    label="Price"
+                    prefix="$"
+                    type="text"
+                    inputMode="decimal"
+                    value={priceStr}
+                    onChange={(e) => setPriceStr(e.target.value)}
+                    onBlur={handlePriceBlur}
+                    placeholder="0.00"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <Input
+                    label="Store / Retailer"
+                    type="text"
+                    value={form.purchasedAt}
+                    onChange={set("purchasedAt")}
+                    placeholder="e.g. Sephora, Ulta"
+                  />
+                  <Input
+                    label="Barcode"
+                    type="text"
+                    value={form.barcode}
+                    onChange={set("barcode")}
+                    placeholder="e.g. 3614272263955"
+                    inputMode="numeric"
+                    className="font-mono"
+                  />
+                </div>
+
+                <div>
+                  <Text as="label" variant="label" className="block mb-1">
+                    Notes
+                  </Text>
+                  <textarea
+                    value={form.notes}
+                    onChange={set("notes")}
+                    placeholder="Any notes about this product…"
+                    rows={2}
+                    className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-800 focus:outline-none focus:ring-2 focus:ring-rose-300 resize-none dark:bg-zinc-700 dark:border-zinc-600 dark:text-zinc-100 dark:placeholder-zinc-500"
+                  />
+                </div>
+
                 <Input
-                  label="Size"
-                  type="text"
-                  value={form.size}
-                  onChange={set("size")}
-                  placeholder="e.g. 1 oz, 30ml"
+                  label="Image URL"
+                  type="url"
+                  value={form.imageUrl}
+                  onChange={set("imageUrl")}
+                  placeholder="https://"
                 />
-              </div>
 
-              <div className="grid grid-cols-2 gap-3">
                 <Input
-                  label="Date Bought"
-                  type="date"
-                  value={form.dateBought}
-                  onChange={set("dateBought")}
+                  label="Retailer Link"
+                  type="url"
+                  value={form.retailerUrl}
+                  onChange={set("retailerUrl")}
+                  placeholder="https://"
                 />
-                <Input
-                  label="Price"
-                  prefix="$"
-                  type="text"
-                  inputMode="decimal"
-                  value={priceStr}
-                  onChange={(e) => setPriceStr(e.target.value)}
-                  onBlur={handlePriceBlur}
-                  placeholder="0.00"
-                />
-              </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <Input
-                  label="Store / Retailer"
-                  type="text"
-                  value={form.purchasedAt}
-                  onChange={set("purchasedAt")}
-                  placeholder="e.g. Sephora, Ulta"
-                />
-                <Input
-                  label="Barcode"
-                  type="text"
-                  value={form.barcode}
-                  onChange={set("barcode")}
-                  placeholder="e.g. 3614272263955"
-                  inputMode="numeric"
-                  className="font-mono"
-                />
-              </div>
+                <div className="flex gap-3 pt-2">
+                  <Button
+                    variant="secondary"
+                    type="button"
+                    onClick={() => setEditing(false)}
+                    className="flex-1"
+                  >
+                    Cancel
+                  </Button>
+                  <Button type="submit" className="flex-1">
+                    Save Changes
+                  </Button>
+                </div>
 
-              <div>
-                <Text as="label" variant="label" className="block mb-1">
-                  Notes
-                </Text>
-                <textarea
-                  value={form.notes}
-                  onChange={set("notes")}
-                  placeholder="Any notes about this product…"
-                  rows={2}
-                  className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-800 focus:outline-none focus:ring-2 focus:ring-rose-300 resize-none dark:bg-zinc-700 dark:border-zinc-600 dark:text-zinc-100 dark:placeholder-zinc-500"
-                />
-              </div>
-
-              <Input
-                label="Image URL"
-                type="url"
-                value={form.imageUrl}
-                onChange={set("imageUrl")}
-                placeholder="https://"
-              />
-
-              <Input
-                label="Retailer Link"
-                type="url"
-                value={form.retailerUrl}
-                onChange={set("retailerUrl")}
-                placeholder="https://"
-              />
-
-              <div className="flex gap-3 pt-2">
-                <Button
-                  variant="secondary"
-                  type="button"
-                  onClick={() => setEditing(false)}
-                  className="flex-1"
-                >
-                  Cancel
-                </Button>
-                <Button type="submit" className="flex-1">
-                  Save Changes
-                </Button>
-              </div>
-
-              <div className="pt-1 border-t border-zinc-100 dark:border-zinc-700">
-                <Button
-                  variant="ghost"
-                  color="destructive"
-                  type="button"
-                  onClick={confirmDeleteModal.open}
-                  className="w-full"
-                >
-                  Delete Product
-                </Button>
-              </div>
-            </form>
-          </div>
+                <div className="pt-1 border-t border-zinc-100 dark:border-zinc-700">
+                  <Button
+                    variant="ghost"
+                    color="destructive"
+                    type="button"
+                    onClick={confirmDeleteModal.open}
+                    className="w-full"
+                  >
+                    Delete Product
+                  </Button>
+                </div>
+              </form>
+            </div>
+            <ConfirmModal
+              modalControls={confirmDeleteModal}
+              title="Delete Product"
+              message={`Are you sure you want to delete "${product.name}"? This cannot be undone.`}
+              confirmLabel="Delete"
+              onConfirm={onDelete}
+            />
+          </>
         ) : (
           <div className="p-6 flex flex-col gap-4">
             {product.imageUrl && <ProductImage url={product.imageUrl} />}
@@ -338,7 +350,7 @@ export default function ProductModal({
                   Amazon:
                 </Text>
                 <Link
-                  href={amazonSearchUrl}
+                  href={buildAmazonSearchUrl(product)}
                   variant="icon"
                   title={`Search "${[product.brand, product.name].filter(Boolean).join(" ")}" on Amazon`}
                 >
@@ -400,14 +412,6 @@ export default function ProductModal({
           </div>
         )}
       </Modal>
-
-      <ConfirmModal
-        modalControls={confirmDeleteModal}
-        title="Delete Product"
-        message={`Are you sure you want to delete "${product.name}"? This cannot be undone.`}
-        confirmLabel="Delete"
-        onConfirm={onDelete}
-      />
     </>
   );
 }

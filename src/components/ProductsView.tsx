@@ -6,10 +6,7 @@ import AddProductModal from "./AddProductModal";
 import ImportExportModal from "./ImportExportModal";
 import ProductCard from "./ProductCard";
 import ProductModal from "./ProductModal";
-import Button from "./ui/Button";
-import IconButton from "./ui/IconButton";
-import Select from "./ui/Select";
-import Text from "./ui/Text";
+import { Button, IconButton, Select, Text } from "./ui/UI";
 
 interface ProductsViewProps {
   products: Product[];
@@ -48,17 +45,18 @@ function sortProducts(
   return [...products].sort((a, b) => {
     let cmp = 0;
     if (field === "price") {
-      if (a.price == null && b.price == null) cmp = 0;
+      if (a.price == null && b.price == null) return 0;
       else if (a.price == null) return 1;
       else if (b.price == null) return -1;
       else cmp = a.price - b.price;
     } else {
-      const av = a[field];
-      const bv = b[field];
-      if (!av && !bv) cmp = 0;
-      else if (!av) return 1;
-      else if (!bv) return -1;
-      else cmp = av < bv ? -1 : av > bv ? 1 : 0;
+      const aValue = a[field];
+      const bValue = b[field];
+      if (!aValue && !bValue) return 0;
+      else if (!aValue) return 1;
+      else if (!bValue) return -1;
+      else if (aValue < bValue) cmp = -1;
+      else if (aValue > bValue) cmp = 1;
     }
     return dir === "asc" ? cmp : -cmp;
   });
@@ -74,6 +72,7 @@ export default function ProductsView({
 }: ProductsViewProps) {
   const [activeProduct, setActiveProduct] = useState<Product | null>(null);
   const addProductModal = useModal();
+  const productModal = useModal();
   const importExportModal = useModal();
   const [statusFilter, setStatusFilter] = useState<ProductStatus | "all">(
     "all",
@@ -81,10 +80,6 @@ export default function ProductsView({
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [sortField, setSortField] = useState<SortField>("createdAt");
   const [sortDir, setSortDir] = useState<SortDir>("desc");
-
-  const liveProduct = activeProduct
-    ? (products.find((p) => p.id === activeProduct.id) ?? null)
-    : null;
 
   const filtered = sortProducts(
     products.filter((p) => {
@@ -131,7 +126,7 @@ export default function ProductsView({
           title={sortDir === "asc" ? "Ascending" : "Descending"}
         >
           <span
-            className={`transition-all ${
+            className={`transition-all duration-400 ${
               sortDir !== "asc" ? "rotate-180 " : "rotate-0"
             }`}
           >
@@ -197,21 +192,29 @@ export default function ProductsView({
             <ProductCard
               key={product.id}
               product={product}
-              onOpen={() => setActiveProduct(product)}
+              onClick={() => {
+                productModal.open();
+                setActiveProduct(product);
+              }}
             />
           ))}
         </div>
       )}
 
       <ProductModal
-        product={liveProduct}
-        onClose={() => setActiveProduct(null)}
+        product={activeProduct}
+        modalControls={productModal}
+        onClose={() => {
+          setTimeout(() => {
+            setActiveProduct(null);
+          }, 0);
+        }}
         onSave={(data) => {
-          if (liveProduct) onUpdate(liveProduct.id, data);
+          if (activeProduct) onUpdate(activeProduct.id, data);
         }}
         onDelete={() => {
-          if (liveProduct) {
-            onDelete(liveProduct.id);
+          if (activeProduct) {
+            onDelete(activeProduct.id);
             setActiveProduct(null);
           }
         }}

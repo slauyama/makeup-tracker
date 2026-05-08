@@ -1,24 +1,23 @@
 import { useState } from "react";
 import { ProductStatus } from "../constants";
 import { Product } from "../hooks/useProducts";
-import Card from "./ui/Card";
-import Text from "./ui/Text";
+import { Card, Text } from "./ui/UI";
 
 interface ProductCardProps {
   product: Product;
-  onOpen: () => void;
+  onClick: () => void;
 }
 
-export default function ProductCard({ product, onOpen }: ProductCardProps) {
+export default function ProductCard({ product, onClick }: ProductCardProps) {
   const [imgBroken, setImgBroken] = useState(false);
   const isFinished = product.status === ProductStatus.Finished;
   const showImage = product.imageUrl && !imgBroken;
 
   return (
     <Card
-      onClick={onOpen}
+      onClick={onClick}
       className={`flex flex-col transition cursor-pointer hover:shadow-md hover:border-rose-200 dark:hover:border-rose-200 overflow-hidden ${
-        isFinished ? "opacity-55" : ""
+        isFinished ? "opacity-55" : "opacity-100"
       }`}
     >
       {showImage && (

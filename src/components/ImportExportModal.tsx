@@ -1,11 +1,8 @@
 import { useRef, useState } from "react";
 import { Product } from "../hooks/useProducts";
-import Button from "./ui/Button";
-import DropzoneButton from "./DropzoneButton";
-import Heading from "./ui/Heading";
-import Modal from "./ui/Modal";
-import Text from "./ui/Text";
+import { Button, Heading, Modal, Text } from "./ui/UI";
 import { ModalControls } from "../hooks/useModal";
+import DropzoneButton from "./DropzoneButton";
 
 interface ImportExportModalProps {
   products: Product[];

@@ -10,9 +10,7 @@ interface ModalProps {
   subtitle?: string;
   /** Override the action for the title × button (defaults to modalControls.close). */
   onClose?: () => void;
-  /** Extra classes applied to the white card (e.g. "max-h-[90vh] overflow-y-auto") */
   className?: string;
-  /** Whether clicking the dark backdrop closes the modal. Default false. */
   closeOnBackdrop?: boolean;
   modalControls: ModalControls;
 }
@@ -26,7 +24,13 @@ export default function Modal({
   closeOnBackdrop = true,
   modalControls,
 }: ModalProps) {
-  const handleClose = onClose ?? modalControls.close;
+  function handleClose() {
+    if (onClose) {
+      onClose();
+    }
+
+    modalControls.close();
+  }
 
   useEffect(() => {
     if (!modalControls.isOpen) return;
@@ -37,15 +41,13 @@ export default function Modal({
     return () => window.removeEventListener("keydown", onKey);
   }, [modalControls.isOpen, handleClose]);
 
-  if (!modalControls.isOpen) return null;
-
   return (
     <div
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-40 p-4"
+      className={`fixed inset-0 bg-black/50 flex items-center justify-center z-40 p-4 transition-all duration-300 ${modalControls.isOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
       onClick={closeOnBackdrop ? handleClose : undefined}
     >
       <div
-        className={`bg-white dark:bg-zinc-800 rounded-2xl shadow-xl w-full max-w-md ${className}`}
+        className={`bg-white dark:bg-zinc-800 rounded-2xl shadow-xl w-full max-w-md transition-all duration-300 transform ${modalControls.isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"} ${className}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-start px-6 pt-5">
