@@ -77,7 +77,7 @@ export default function ImportExportModal({
           </Heading>
           <button
             onClick={modalControls.close}
-            className="text-gray-400 hover:text-gray-600 text-2xl leading-none"
+            className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 text-2xl leading-none"
           >
             &times;
           </button>
@@ -99,25 +99,25 @@ export default function ImportExportModal({
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex-1 h-px bg-gray-100" />
-          <Text variant="caption" className="text-gray-300">
+          <div className="flex-1 h-px bg-zinc-100 dark:bg-zinc-700" />
+          <Text variant="caption" className="text-zinc-300">
             or
           </Text>
-          <div className="flex-1 h-px bg-gray-100" />
+          <div className="flex-1 h-px bg-zinc-100 dark:bg-zinc-700" />
         </div>
 
         <div className="flex flex-col gap-3">
           <Heading as="h3" variant="subtitle">
             Import
           </Heading>
-          <Text variant="caption" className="text-gray-400">
+          <Text variant="caption" className="text-zinc-400">
             Load products from a previously exported JSON file.
           </Text>
 
           <button
             type="button"
             onClick={() => fileRef.current?.click()}
-            className="w-full border-2 border-dashed border-gray-200 rounded-lg px-4 py-6 text-sm text-gray-400 hover:border-rose-300 hover:text-rose-400 transition-colors text-center"
+            className="w-full border-2 border-dashed border-zinc-200 dark:border-zinc-600 rounded-lg px-4 py-6 text-sm text-zinc-400 hover:border-rose-300 hover:text-rose-400 transition-colors text-center"
           >
             {preview
               ? `✓ ${preview.length} product${preview.length !== 1 ? "s" : ""} ready to import`
@@ -144,12 +144,12 @@ export default function ImportExportModal({
                 onClick={() => setMode("merge")}
                 className={`flex-1 text-xs px-3 py-2 rounded-lg border transition ${
                   mode === "merge"
-                    ? "bg-rose-50 border-rose-300 text-rose-600 font-medium"
-                    : "border-gray-200 text-gray-500 hover:border-gray-300"
+                    ? "bg-rose-50 dark:bg-rose-950 border-rose-300 dark:border-rose-800 text-rose-600 dark:text-rose-400 font-medium"
+                    : "border-zinc-200 dark:border-zinc-600 text-zinc-500 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-500"
                 }`}
               >
                 Merge
-                <span className="block font-normal text-gray-400 mt-0.5">
+                <span className="block font-normal text-zinc-400 mt-0.5">
                   Add new, keep existing
                 </span>
               </button>
@@ -158,12 +158,12 @@ export default function ImportExportModal({
                 onClick={() => setMode("replace")}
                 className={`flex-1 text-xs px-3 py-2 rounded-lg border transition ${
                   mode === "replace"
-                    ? "bg-rose-50 border-rose-300 text-rose-600 font-medium"
-                    : "border-gray-200 text-gray-500 hover:border-gray-300"
+                    ? "bg-rose-50 dark:bg-rose-950 border-rose-300 dark:border-rose-800 text-rose-600 dark:text-rose-400 font-medium"
+                    : "border-zinc-200 dark:border-zinc-600 text-zinc-500 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-500"
                 }`}
               >
                 Replace
-                <span className="block font-normal text-gray-400 mt-0.5">
+                <span className="block font-normal text-zinc-400 mt-0.5">
                   Overwrite all current data
                 </span>
               </button>

@@ -88,7 +88,7 @@ export default function AddProductModal({
           </Heading>
           <button
             onClick={modalControls.close}
-            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 text-2xl leading-none"
+            className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 text-2xl leading-none"
           >
             &times;
           </button>
@@ -186,7 +186,7 @@ export default function AddProductModal({
               onChange={set("notes")}
               placeholder="Any notes about this product…"
               rows={2}
-              className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-rose-300 resize-none dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-500"
+              className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-800 focus:outline-none focus:ring-2 focus:ring-rose-300 resize-none dark:bg-zinc-700 dark:border-zinc-600 dark:text-zinc-100 dark:placeholder-zinc-500"
             />
           </div>
 
@@ -221,7 +221,7 @@ export default function AddProductModal({
           </div>
 
           {onDelete && (
-            <div className="pt-1 border-t border-gray-100 dark:border-gray-700">
+            <div className="pt-1 border-t border-zinc-100 dark:border-zinc-700">
               <button
                 type="button"
                 onClick={onDelete}

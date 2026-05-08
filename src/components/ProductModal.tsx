@@ -78,7 +78,7 @@ function Row({ label, value }: { label: string; value: string }) {
     <div>
       <Text
         variant="caption"
-        className="text-gray-400 uppercase tracking-wide mb-0.5"
+        className="text-zinc-400 uppercase tracking-wide mb-0.5"
       >
         {label}
       </Text>
@@ -156,7 +156,7 @@ export default function ProductModal({
               </Heading>
               <button
                 onClick={() => setEditing(false)}
-                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 text-2xl leading-none"
+                className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 text-2xl leading-none"
               >
                 &times;
               </button>
@@ -254,7 +254,7 @@ export default function ProductModal({
                   onChange={set("notes")}
                   placeholder="Any notes about this product…"
                   rows={2}
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-rose-300 resize-none dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-500"
+                  className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-800 focus:outline-none focus:ring-2 focus:ring-rose-300 resize-none dark:bg-zinc-700 dark:border-zinc-600 dark:text-zinc-100 dark:placeholder-zinc-500"
                 />
               </div>
 
@@ -288,7 +288,7 @@ export default function ProductModal({
                 </Button>
               </div>
 
-              <div className="pt-1 border-t border-gray-100 dark:border-gray-700">
+              <div className="pt-1 border-t border-zinc-100 dark:border-zinc-700">
                 <button
                   type="button"
                   onClick={confirmDeleteModal.open}
@@ -314,7 +314,7 @@ export default function ProductModal({
               </div>
               <button
                 onClick={onClose}
-                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 text-2xl leading-none shrink-0"
+                className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 text-2xl leading-none shrink-0"
               >
                 &times;
               </button>
@@ -341,7 +341,7 @@ export default function ProductModal({
               <div>
                 <Text
                   variant="caption"
-                  className="text-gray-400 uppercase tracking-wide mb-0.5"
+                  className="text-zinc-400 uppercase tracking-wide mb-0.5"
                 >
                   Notes
                 </Text>
@@ -351,17 +351,17 @@ export default function ProductModal({
               </div>
             )}
 
-            <div className="flex flex-row gap-4 border-t border-gray-100 dark:border-gray-700 pt-3">
+            <div className="flex flex-row gap-4 border-t border-zinc-100 dark:border-zinc-700 pt-3">
               {product.retailerUrl && (
                 <div className="flex items-center gap-1">
-                  <Text variant="caption" className="text-gray-400 shrink-0">
+                  <Text variant="caption" className="text-zinc-400 shrink-0">
                     Retailer:
                   </Text>
                   <Link href={product.retailerUrl}>Link</Link>
                 </div>
               )}
               <div className="flex items-center gap-1">
-                <Text variant="caption" className="text-gray-400 shrink-0">
+                <Text variant="caption" className="text-zinc-400 shrink-0">
                   Amazon:
                 </Text>
                 <Link
@@ -378,7 +378,7 @@ export default function ProductModal({
               </div>
               {product.barcode && (
                 <div className="flex items-center gap-1">
-                  <Text variant="caption" className="text-gray-400 shrink-0">
+                  <Text variant="caption" className="text-zinc-400 shrink-0">
                     Barcode:
                   </Text>
                   <Link
@@ -416,7 +416,7 @@ export default function ProductModal({
                 }}
                 className={
                   isFinished
-                    ? "flex-1 text-xs bg-gray-50 dark:bg-gray-700 text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-gray-600 px-2 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition"
+                    ? "flex-1 text-xs bg-zinc-50 dark:bg-zinc-700 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-600 px-2 py-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-600 transition"
                     : "flex-1 text-xs bg-rose-50 dark:bg-rose-950 text-rose-500 border border-rose-200 dark:border-rose-800 px-2 py-1.5 rounded-lg hover:bg-rose-100 dark:hover:bg-rose-900 transition"
                 }
               >

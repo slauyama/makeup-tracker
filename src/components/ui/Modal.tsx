@@ -35,7 +35,7 @@ export default function Modal({
       onClick={closeOnBackdrop ? modalControls.close : undefined}
     >
       <div
-        className={`bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-md ${className}`}
+        className={`bg-white dark:bg-zinc-800 rounded-2xl shadow-xl w-full max-w-md ${className}`}
         onClick={(e) => e.stopPropagation()}
       >
         {children}

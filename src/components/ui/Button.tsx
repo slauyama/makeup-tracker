@@ -15,9 +15,10 @@ const BASE =
 const VARIANTS: Record<Variant, string> = {
   primary: "bg-rose-500 text-white hover:bg-rose-600 rounded-lg shadow-sm",
   secondary:
-    "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700",
-  ghost: "text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700",
-  danger: "text-gray-300 hover:text-red-400",
+    "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50 rounded-lg dark:bg-zinc-800 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-700",
+  ghost:
+    "text-zinc-500 hover:text-zinc-700 hover:bg-zinc-100 rounded-lg dark:text-zinc-400 dark:hover:text-zinc-200 dark:hover:bg-zinc-700",
+  danger: "text-zinc-300 hover:text-red-400",
   pill: "rounded-full border",
 };
 
@@ -28,7 +29,8 @@ const SIZES: Record<Size, string> = {
 
 const PILL_COLOR = {
   active: "bg-rose-500 text-white border-rose-500 shadow-sm",
-  inactive: "bg-white text-gray-600 border-gray-200 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 dark:hover:bg-gray-700",
+  inactive:
+    "bg-white text-zinc-600 border-zinc-200 hover:bg-zinc-50 dark:bg-zinc-800 dark:text-zinc-300 dark:border-zinc-700 dark:hover:bg-zinc-700",
 };
 
 /**

@@ -16,7 +16,7 @@ interface SelectProps extends Omit<
 }
 
 const BASE =
-  "bg-white text-sm text-gray-600 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-rose-300 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700";
+  "bg-white text-sm text-zinc-600 border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-rose-300 dark:bg-zinc-800 dark:text-zinc-300 dark:border-zinc-700";
 
 const VARIANTS: Record<Variant, string> = {
   default: "rounded-lg px-3 py-2",
@@ -39,16 +39,7 @@ export default function Select({
   ...props
 }: SelectProps) {
   const select = (
-
-  );
-
-  if (label) {
-    return (
-      <div>
-        <Text as="label" variant="label" className="block mb-1">
-          {label}
-        </Text>
-            <select
+    <select
       value={value}
       onChange={onChange}
       className={[BASE, VARIANTS[variant], className].filter(Boolean).join(" ")}
@@ -65,6 +56,15 @@ export default function Select({
         );
       })}
     </select>
+  );
+
+  if (label) {
+    return (
+      <div>
+        <Text as="label" variant="label" className="block mb-1">
+          {label}
+        </Text>
+        {select}
       </div>
     );
   }

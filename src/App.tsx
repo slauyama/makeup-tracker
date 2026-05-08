@@ -98,11 +98,11 @@ export default function App() {
     : null;
 
   return (
-    <div className="min-h-screen bg-rose-50">
-      <header className="bg-white shadow-sm sticky top-0 z-10">
+    <div className="min-h-screen bg-rose-50 dark:bg-zinc-900">
+      <header className="bg-white dark:bg-zinc-800 shadow-sm sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
           <div>
-            <Heading as="h1" variant="display" className="text-rose-500">
+            <Heading as="h1" variant="display">
               Beauty Tracker
             </Heading>
             <Text variant="muted" as="p" className="mt-0.5">
@@ -151,7 +151,7 @@ export default function App() {
                 </Button>
               ))}
 
-              <div className="w-px h-5 bg-gray-200 mx-1" />
+              <div className="w-px h-5 bg-zinc-200 dark:bg-zinc-700 mx-1" />
 
               <Select
                 value={categoryFilter}
@@ -159,7 +159,7 @@ export default function App() {
                 options={CATEGORY_OPTIONS}
               />
 
-              <div className="w-px h-5 bg-gray-200 mx-1" />
+              <div className="w-px h-5 bg-zinc-200 dark:bg-zinc-700 mx-1" />
 
               <Select
                 value={sortField}
@@ -170,7 +170,7 @@ export default function App() {
                 onClick={() =>
                   setSortDir((d) => (d === "asc" ? "desc" : "asc"))
                 }
-                className="text-sm text-gray-500 hover:text-gray-700 px-2 py-1 rounded-lg hover:bg-gray-100 transition"
+                className="text-sm text-zinc-500 hover:text-zinc-700 px-2 py-1 rounded-lg hover:bg-zinc-100 transition dark:text-zinc-400 dark:hover:text-zinc-200 dark:hover:bg-zinc-700"
                 title={sortDir === "asc" ? "Ascending" : "Descending"}
               >
                 {sortDir === "asc" ? "↑" : "↓"}
@@ -185,7 +185,7 @@ export default function App() {
                 <Text
                   variant="body"
                   as="p"
-                  className="text-lg font-medium text-gray-500"
+                  className="text-lg font-medium text-zinc-500"
                 >
                   {products.length === 0
                     ? "No products yet"
@@ -210,7 +210,6 @@ export default function App() {
                   <ProductCard
                     key={product.id}
                     product={product}
-                    updateProductStatus={updateProductStatus}
                     onOpen={() => setActiveProduct(product)}
                   />
                 ))}

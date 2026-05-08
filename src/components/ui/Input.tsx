@@ -7,7 +7,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const BASE =
-  "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-rose-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-500";
+  "w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-800 focus:outline-none focus:ring-2 focus:ring-rose-300 dark:bg-zinc-700 dark:border-zinc-600 dark:text-zinc-100 dark:placeholder-zinc-500";
 
 export default function Input({
   prefix,
@@ -17,7 +17,7 @@ export default function Input({
 }: InputProps) {
   const input = prefix ? (
     <div className="relative">
-      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm select-none dark:text-gray-500">
+      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 text-sm select-none dark:text-zinc-500">
         {prefix}
       </span>
       <input
