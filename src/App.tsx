@@ -8,6 +8,7 @@ import ProductModal from "./components/ProductModal";
 import ProductCard from "./components/ProductCard";
 import StatsView from "./components/StatsView";
 import Button from "./components/ui/Button";
+import IconButton from "./components/ui/IconButton";
 import Heading from "./components/ui/Heading";
 import Text from "./components/ui/Text";
 import Select from "./components/ui/Select";
@@ -161,20 +162,18 @@ export default function App() {
 
               <div className="w-px h-5 bg-zinc-200 dark:bg-zinc-700 mx-1" />
 
+              <Text>Sort</Text>
               <Select
                 value={sortField}
                 onChange={(e) => setSortField(e.target.value as SortField)}
                 options={SORT_OPTIONS}
               />
-              <button
-                onClick={() =>
-                  setSortDir((d) => (d === "asc" ? "desc" : "asc"))
-                }
-                className="text-sm text-zinc-500 hover:text-zinc-700 px-2 py-1 rounded-lg hover:bg-zinc-100 transition dark:text-zinc-400 dark:hover:text-zinc-200 dark:hover:bg-zinc-700"
+              <IconButton
+                onClick={() => setSortDir((d) => (d === "asc" ? "desc" : "asc"))}
                 title={sortDir === "asc" ? "Ascending" : "Descending"}
               >
                 {sortDir === "asc" ? "↑" : "↓"}
-              </button>
+              </IconButton>
             </div>
 
             {filtered.length === 0 ? (
@@ -194,12 +193,9 @@ export default function App() {
                 {products.length === 0 && (
                   <Text variant="muted" as="p" className="mt-1">
                     Hit{" "}
-                    <button
-                      onClick={addProductModal.open}
-                      className="text-rose-400 underline hover:text-rose-500"
-                    >
+                    <Button variant="inline" onClick={addProductModal.open}>
                       + Add Product
-                    </button>{" "}
+                    </Button>{" "}
                     to get started!
                   </Text>
                 )}
