@@ -4,6 +4,7 @@
 
 ### High
 
+- Add login view
 - Use firebase for nosql db
 - Transitions / Animations
   - Should abide by useLessMotion
@@ -15,10 +16,6 @@
   - Save should have a intermission screen
   - Mark finish vs mark active fade in
   - Shadow of product card fade in and out
-- Cost / day should be based on first date vs current date
-  - item cost will go down over time
-- Mark finished button should use button component
-- Make stat view its own link. Make it 3-4 decimal places
 
 ### Low
 

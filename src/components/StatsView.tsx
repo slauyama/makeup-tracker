@@ -65,7 +65,11 @@ export default function StatsView({ products }: StatsViewProps) {
   const stats = useMemo(() => buildStats(products, today), [products, today]);
 
   const totalSpent = stats.reduce((sum, s) => sum + s.price, 0);
-  const totalCostPerDay = stats.reduce((sum, s) => sum + s.costPerDay, 0);
+  const largestDaysOwned = stats.reduce(
+    (largestDaysOwned, s) => Math.max(largestDaysOwned, s.daysOwned),
+    0,
+  );
+  const totalCostPerDay = totalSpent / largestDaysOwned;
   const totalCostPerYear = totalCostPerDay * 365;
   const pricedCount = stats.length;
   const unpricedCount = products.filter(
