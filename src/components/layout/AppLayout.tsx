@@ -2,7 +2,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
 const NAV_LINKS = [
-  { to: "/makeup", label: "Makeup" },
+  { to: "/beauty", label: "Beauty" },
   { to: "/dog", label: "Dog" },
   { to: "/car", label: "Car" },
 ];

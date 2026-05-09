@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 const SECTIONS = [
-  { to: "/makeup", label: "Makeup", emoji: "💄" },
+  { to: "/beauty", label: "Beauty", emoji: "💄" },
   { to: "/dog", label: "Dog", emoji: "🐾" },
   { to: "/car", label: "Car", emoji: "🚗" },
 ];

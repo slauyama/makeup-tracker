@@ -1,4 +1,4 @@
-# Designed to help track my wifes makeup
+# Designed to help track our life
 
 ## Ideas
 

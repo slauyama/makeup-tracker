@@ -1,13 +1,13 @@
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { useProducts } from "../hooks/useProducts";
-import ProductsView from "../components/makeup/ProductsView";
-import StatsView from "../components/makeup/StatsView";
+import ProductsView from "../components/beauty/ProductsView";
+import StatsView from "../components/beauty/StatsView";
 import Button from "../components/ui/Button";
 import Heading from "../components/ui/Heading";
 import Text from "../components/ui/Text";
 import { ProductStatus } from "../constants";
 
-export default function MakeupPage() {
+export default function BeautyPage() {
   const {
     products,
     addProduct,
@@ -39,7 +39,7 @@ export default function MakeupPage() {
         <Button
           variant="secondary"
           size="sm"
-          onClick={() => navigate(showStats ? "/makeup" : "/makeup/stats")}
+          onClick={() => navigate(showStats ? "/beauty" : "/beauty/stats")}
         >
           {showStats ? "← Products" : "Stats"}
         </Button>
