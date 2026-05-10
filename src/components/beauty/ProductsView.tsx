@@ -3,7 +3,6 @@ import { ProductStatus, ALL_CATEGORIES } from "../../constants";
 import type { Product, ProductInput } from "../../hooks/useProducts";
 import { useModal } from "../../hooks/useModal";
 import AddProductModal from "./AddProductModal";
-import ExportModal from "./ExportModal";
 import ProductCard from "./ProductCard";
 import ProductModal from "./ProductModal";
 import { Button, IconButton, Select, Text } from "../ui/UI";
@@ -72,7 +71,6 @@ export default function ProductsView({
   const [activeProduct, setActiveProduct] = useState<Product | null>(null);
   const addProductModal = useModal();
   const productModal = useModal();
-  const exportModal = useModal();
   const [statusFilter, setStatusFilter] = useState<ProductStatus | "all">(
     "all",
   );
@@ -89,6 +87,20 @@ export default function ProductsView({
     sortField,
     sortDir,
   );
+
+  function downloadJSON() {
+    const blob = new Blob([JSON.stringify(products, null, 2)], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `beauty-tracker-${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
 
   return (
     <>
@@ -150,7 +162,7 @@ export default function ProductsView({
         <Button
           variant="secondary"
           size="sm"
-          onClick={importExportModal.open}
+          onClick={downloadJSON}
           className="hidden sm:inline-flex"
         >
           Export
@@ -233,8 +245,6 @@ export default function ProductsView({
         }}
         modalControls={addProductModal}
       />
-
-      <ExportModal modalControls={exportModal} products={products} />
     </>
   );
 }

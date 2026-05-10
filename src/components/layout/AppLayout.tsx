@@ -2,9 +2,10 @@ import { NavLink, Outlet } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
 const NAV_LINKS = [
-  { to: "/beauty", label: "Beauty" },
-  { to: "/dog", label: "Dog" },
-  { to: "/car", label: "Car" },
+  { to: "/", label: "Home", end: true },
+  { to: "/beauty", label: "Beauty", end: false },
+  { to: "/dog", label: "Dog", end: false },
+  { to: "/car", label: "Car", end: false },
 ];
 
 export default function AppLayout() {
@@ -15,10 +16,11 @@ export default function AppLayout() {
       <header className="bg-white dark:bg-zinc-800 shadow-sm sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <nav className="flex gap-6">
-            {NAV_LINKS.map(({ to, label }) => (
+            {NAV_LINKS.map(({ to, label, end }) => (
               <NavLink
                 key={to}
                 to={to}
+                end={end}
                 className={({ isActive }) =>
                   `text-sm font-medium transition-colors ${
                     isActive
