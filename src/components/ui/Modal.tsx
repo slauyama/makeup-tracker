@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useCallback, useEffect } from "react";
 import { ModalControls } from "../../hooks/useModal";
 import Heading from "./Heading";
 import IconButton from "./IconButton";
@@ -24,13 +24,10 @@ export default function Modal({
   closeOnBackdrop = true,
   modalControls,
 }: ModalProps) {
-  function handleClose() {
-    if (onClose) {
-      onClose();
-    }
-
+  const handleClose = useCallback(() => {
+    if (onClose) onClose();
     modalControls.close();
-  }
+  }, [onClose, modalControls]);
 
   useEffect(() => {
     if (!modalControls.isOpen) return;
