@@ -4,10 +4,8 @@
 
 ### High
 
-- Use firebase for nosql db
 - Fix scroll bar on modal
 - Fix dark mode colors.
-  - Red button should be different
   - Fix button variants and color
   - Add white background on product card images to fix transparency issues
 - Transitions / Animations

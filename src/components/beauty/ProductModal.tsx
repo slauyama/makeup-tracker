@@ -69,7 +69,7 @@ function ProductImage({ url }: { url: string }) {
     <img
       src={url}
       alt="Product"
-      className="w-full aspect-square object-cover rounded-xl"
+      className="w-full bg-white aspect-square object-cover rounded-xl"
       onError={() => setBroken(true)}
     />
   );
@@ -300,7 +300,10 @@ export default function ProductModal({
               title="Delete Product"
               message={`Are you sure you want to delete "${product.name}"? This cannot be undone.`}
               confirmLabel="Delete"
-              onConfirm={onDelete}
+              onConfirm={() => {
+                onDelete();
+                onClose();
+              }}
             />
           </>
         ) : (
