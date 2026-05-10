@@ -149,7 +149,7 @@ export default function ProductModal({
           }, 0);
         }}
         closeOnBackdrop={!editing}
-        className="max-h-[90vh] overflow-y-auto"
+        className="max-h-[90vh] overflow-y-auto scrollbar-thin"
       >
         {product === null ? (
           ""

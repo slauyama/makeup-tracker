@@ -4,7 +4,6 @@
 
 ### High
 
-- Fix scroll bar on modal
 - Fix dark mode colors.
   - Fix button variants and color
   - Add white background on product card images to fix transparency issues
