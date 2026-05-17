@@ -8,7 +8,6 @@ const COLLECTIONS = [
 ];
 
 async function main() {
-  console.log("Syncing prod to dev");
   const prodApp = initializeApp(
     {
       credential: cert(
@@ -31,8 +30,8 @@ async function main() {
 
   for (const col of COLLECTIONS) {
     console.log(`\nSyncing ${col}...`);
-    await deleteCollection(devDb, col);
-    await copyCollection(prodDb, devDb, col);
+    await deleteCollection(prodDb, col);
+    await copyCollection(devDb, prodDb, col);
   }
 
   console.log("\nSync complete.");

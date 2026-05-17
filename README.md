@@ -4,10 +4,6 @@
 
 ### High
 
-- Create 2 firebase projects one for dev and one for prod
-- Create 2 github actions
-  - 1. to sync prod with dev should run on cron job daily
-  - 2. sync dev with prod (ran with confirmation in case prod data disappears)
 - Create playwright tests to ensure website isnt down after deploying
 - Fix dark mode colors.
   - Fix button variants and color
@@ -17,8 +13,8 @@
   - Should abide by useLessMotion
   - Hover on buttons
   - Shadow of product card fade in and out
+- Deleting should not have weird edit modal
 
 ### Low
 
 - Be able to take pictures of the product and be able tt pull all the information from the picture using claude
-- Remove red color
