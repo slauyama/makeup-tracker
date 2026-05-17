@@ -277,7 +277,7 @@ export default function ProductModal({
                 <div className="pt-1 border-t border-zinc-100 dark:border-zinc-700">
                   <Button
                     variant="ghost"
-                    color="destructive"
+                    color="error"
                     type="button"
                     onClick={confirmDeleteModal.open}
                     className="w-full"

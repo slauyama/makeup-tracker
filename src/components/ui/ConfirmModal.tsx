@@ -29,7 +29,7 @@ export default function ConfirmModal({
           </Button>
           <Button
             variant="primary"
-            color="destructive"
+            color="error"
             onClick={() => {
               onConfirm();
               modalControls.close();

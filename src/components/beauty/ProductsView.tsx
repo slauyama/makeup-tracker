@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ProductStatus, ALL_CATEGORIES } from "../../constants";
 import type { Product, ProductInput } from "../../hooks/useProducts";
-import { Button, IconButton, Select, Text, useModal } from "@slauyama/ui";
+import { Button, ChipGroup, IconButton, Select, Text, useModal } from "@slauyama/ui";
 import AddProductModal from "./AddProductModal";
 import ProductCard from "./ProductCard";
 import ProductModal from "./ProductModal";
@@ -104,16 +104,14 @@ export default function ProductsView({
   return (
     <>
       <div className="flex flex-wrap gap-2 mb-6 items-center">
-        {STATUS_FILTERS.map((f) => (
-          <Button
-            key={f}
-            variant="pill"
-            active={statusFilter === f}
-            onClick={() => setStatusFilter(f)}
-          >
-            {f.charAt(0).toUpperCase() + f.slice(1)}
-          </Button>
-        ))}
+        <ChipGroup
+          options={STATUS_FILTERS.map((f) => ({
+            value: f,
+            label: f.charAt(0).toUpperCase() + f.slice(1),
+          }))}
+          value={statusFilter}
+          onChange={(v) => setStatusFilter(v as ProductStatus | "all")}
+        />
 
         <div className="w-px h-5 bg-zinc-200 dark:bg-zinc-700 mx-1" />
 
@@ -159,7 +157,7 @@ export default function ProductsView({
         <div className="flex-1" />
 
         <Button
-          variant="secondary"
+          variant="primary"
           size="sm"
           onClick={downloadJSON}
           className="hidden sm:inline-flex"
