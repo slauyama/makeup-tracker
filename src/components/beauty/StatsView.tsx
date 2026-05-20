@@ -119,10 +119,10 @@ export default function StatsView({ products }: StatsViewProps) {
           <Heading as="h3" variant="subtitle" className="text-zinc-600">
             Cost / Day by Product
           </Heading>
-          <Caption className="text-zinc-400">
+          <Text size="xs" className="text-zinc-400">
             Amortized over days owned — decreases over time as you get more use
             from each product.
-          </Caption>
+          </Text>
           <Card className="overflow-hidden mt-1">
             {stats.map((s, i) => {
               return (
@@ -144,10 +144,10 @@ export default function StatsView({ products }: StatsViewProps) {
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <Caption className="text-zinc-400">
+                      <Text size="xs" className="text-zinc-400">
                         {s.product.brand || s.product.category} · $
                         {formatCurrency(s.price)} · {s.daysOwned}d owned
-                      </Caption>
+                      </Text>
                       <Caption className="text-zinc-400">
                         ${formatCurrency(s.costPerDay * 365)}/yr
                       </Caption>
