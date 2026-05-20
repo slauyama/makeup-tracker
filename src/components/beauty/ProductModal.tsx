@@ -1,10 +1,20 @@
 import { useState } from "react";
 import { ProductStatus, ALL_BRANDS, Brand, Category } from "../../constants";
 import type { Product, ProductInput } from "../../hooks/useProducts";
-import { Button, Input, Link, Modal, Select, Text, useModal, type ModalControls } from "@slauyama/ui";
+import {
+  Button,
+  Input,
+  Link,
+  Modal,
+  Select,
+  Text,
+  useModal,
+  type ModalControls,
+} from "@slauyama/ui";
 import ConfirmModal from "../ui/ConfirmModal";
 
 import AmazonIcon from "../../assets/amazon_icon.png";
+import Caption from "../ui/Caption";
 
 interface ProductModalProps {
   categories: string[];
@@ -50,7 +60,7 @@ function ProductImage({ url }: { url: string }) {
     return (
       <div className="w-full h-40 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center justify-center gap-1 text-slate-400">
         <span className="text-2xl">🖼️</span>
-        <Text variant="caption" className="text-slate-400">
+        <Text size="sm" className="text-slate-400">
           Image could not be loaded — check the URL
         </Text>
       </div>
@@ -71,13 +81,10 @@ function Row({ label, value }: { label: string; value: string }) {
   if (!value) return null;
   return (
     <div>
-      <Text
-        variant="caption"
-        className="text-zinc-400 uppercase tracking-wide mb-0.5"
-      >
+      <Text size="xs" className="text-zinc-400 uppercase tracking-wide mb-0.5">
         {label}
       </Text>
-      <Text variant="body">{value}</Text>
+      <Text size="sm">{value}</Text>
     </div>
   );
 }
@@ -232,7 +239,7 @@ export default function ProductModal({
                 </div>
 
                 <div>
-                  <Text as="label" variant="label" className="block mb-1">
+                  <Text as="label" size="sm" className="block mb-1">
                     Notes
                   </Text>
                   <textarea
@@ -262,7 +269,7 @@ export default function ProductModal({
 
                 <div className="flex gap-3 pt-2">
                   <Button
-                    variant="secondary"
+                    variant="ghost"
                     type="button"
                     onClick={() => setEditing(false)}
                     className="flex-1"
@@ -319,13 +326,8 @@ export default function ProductModal({
 
             {product.notes && (
               <div>
-                <Text
-                  variant="caption"
-                  className="text-zinc-400 uppercase tracking-wide mb-0.5"
-                >
-                  Notes
-                </Text>
-                <Text variant="body" className="whitespace-pre-wrap">
+                <Caption className="text-zinc-400">Notes</Caption>
+                <Text size="sm" className="whitespace-pre-wrap">
                   {product.notes}
                 </Text>
               </div>
@@ -334,16 +336,14 @@ export default function ProductModal({
             <div className="flex flex-row gap-4 border-t border-zinc-100 dark:border-zinc-700 pt-3">
               {product.retailerUrl && (
                 <div className="flex items-center gap-1">
-                  <Text variant="caption" className="text-zinc-400 shrink-0">
+                  <Caption className="text-zinc-400 shrink-0">
                     Retailer:
-                  </Text>
+                  </Caption>
                   <Link href={product.retailerUrl}>Link</Link>
                 </div>
               )}
               <div className="flex items-center gap-1">
-                <Text variant="caption" className="text-zinc-400 shrink-0">
-                  Amazon:
-                </Text>
+                <Caption className="text-zinc-400">Amazon:</Caption>
                 <Link
                   href={buildAmazonSearchUrl(product)}
                   variant="icon"
@@ -358,9 +358,7 @@ export default function ProductModal({
               </div>
               {product.barcode && (
                 <div className="flex items-center gap-1">
-                  <Text variant="caption" className="text-zinc-400 shrink-0">
-                    Barcode:
-                  </Text>
+                  <Caption className="text-zinc-400">Barcode:</Caption>
                   <Link
                     href={`https://www.barcodelookup.com/${product.barcode}`}
                     variant="icon"
@@ -388,7 +386,7 @@ export default function ProductModal({
 
             <div className="flex gap-3 pt-1">
               <Button
-                variant={isFinished ? "ghost" : "secondary"}
+                variant="ghost"
                 size="xs"
                 className="flex-1"
                 onClick={() =>

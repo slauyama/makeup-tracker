@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { Product } from "../../hooks/useProducts";
 import { Card, Heading, Text } from "@slauyama/ui";
+import Caption from "../ui/Caption";
 
 interface StatsViewProps {
   products: Product[];
@@ -48,9 +49,7 @@ function formatCurrency(n: number, fractionDigits = 2): string {
 function StatCard({ label, value }: { label: string; value: string }) {
   return (
     <Card className="p-4 flex flex-col gap-1">
-      <Text variant="caption" className="text-zinc-400 uppercase tracking-wide">
-        {label}
-      </Text>
+      <Text className="text-zinc-400 uppercase tracking-wide">{label}</Text>
       <span className="text-2xl font-bold text-zinc-800 dark:text-zinc-100">
         {value}
       </span>
@@ -77,14 +76,10 @@ export default function StatsView({ products }: StatsViewProps) {
   if (products.length === 0) {
     return (
       <div className="text-center py-20">
-        <Text variant="muted" as="p" className="text-5xl mb-3">
+        <Text as="p" className="text-5xl mb-3">
           💄
         </Text>
-        <Text
-          variant="body"
-          as="p"
-          className="text-lg font-medium text-zinc-500"
-        >
+        <Text as="p" size="lg" className="font-medium text-zinc-500">
           No products yet
         </Text>
       </div>
@@ -93,7 +88,7 @@ export default function StatsView({ products }: StatsViewProps) {
 
   return (
     <div className="flex flex-col gap-6">
-      <Heading as="h2" variant="subtitle" className="text-zinc-600">
+      <Heading as="h2" variant="subtitle">
         Spending Summary
       </Heading>
 
@@ -113,10 +108,10 @@ export default function StatsView({ products }: StatsViewProps) {
       </div>
 
       {unpricedCount > 0 && (
-        <Text variant="caption" className="text-zinc-400">
+        <Caption className="text-zinc-400">
           {unpricedCount} product{unpricedCount !== 1 ? "s" : ""} without a
           price are excluded from calculations.
-        </Text>
+        </Caption>
       )}
 
       {pricedCount > 0 && (
@@ -124,10 +119,10 @@ export default function StatsView({ products }: StatsViewProps) {
           <Heading as="h3" variant="subtitle" className="text-zinc-600">
             Cost / Day by Product
           </Heading>
-          <Text variant="caption" className="text-zinc-400 -mt-1">
+          <Caption className="text-zinc-400">
             Amortized over days owned — decreases over time as you get more use
             from each product.
-          </Text>
+          </Caption>
           <Card className="overflow-hidden mt-1">
             {stats.map((s, i) => {
               return (
@@ -149,13 +144,13 @@ export default function StatsView({ products }: StatsViewProps) {
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <Text variant="caption" className="text-zinc-400">
+                      <Caption className="text-zinc-400">
                         {s.product.brand || s.product.category} · $
                         {formatCurrency(s.price)} · {s.daysOwned}d owned
-                      </Text>
-                      <Text variant="caption" className="text-zinc-400">
+                      </Caption>
+                      <Caption className="text-zinc-400">
                         ${formatCurrency(s.costPerDay * 365)}/yr
-                      </Text>
+                      </Caption>
                     </div>
                   </div>
                 </div>

@@ -3,7 +3,8 @@ import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../lib/firebase";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { Button, Heading, Text } from "@slauyama/ui";
+import { Button, Card, Heading, Text } from "@slauyama/ui";
+import Caption from "../components/ui/Caption";
 
 export default function LoginPage() {
   const { user, loading } = useAuth();
@@ -31,12 +32,12 @@ export default function LoginPage() {
         <Heading as="h1" variant="display" className="mb-2">
           Welcome
         </Heading>
-        <Text variant="muted" as="p" className="mb-8">
+        <Text as="p" className="mb-8">
           Sign in to continue
         </Text>
 
         <Button
-          variant="secondary"
+          variant="ghost"
           onClick={handleGoogleSignIn}
           disabled={signingIn}
           className="w-full"
@@ -45,9 +46,9 @@ export default function LoginPage() {
         </Button>
 
         {error && (
-          <Text variant="caption" as="p" className="mt-4 text-red-500">
-            {error}
-          </Text>
+          <Card surface="error">
+            <Caption className="mt-4">{error}</Caption>
+          </Card>
         )}
       </div>
     </div>

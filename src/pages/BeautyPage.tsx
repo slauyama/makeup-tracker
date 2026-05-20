@@ -29,12 +29,12 @@ export default function BeautyPage() {
           <Heading as="h1" variant="display">
             Beauty Tracker
           </Heading>
-          <Text variant="muted" as="p" className="mt-0.5">
+          <Text as="p" className="mt-0.5">
             {activeCount} product{activeCount !== 1 ? "s" : ""} in use
           </Text>
         </div>
         <Button
-          variant="secondary"
+          variant="ghost"
           size="sm"
           onClick={() => navigate(showStats ? "/beauty" : "/beauty/stats")}
         >

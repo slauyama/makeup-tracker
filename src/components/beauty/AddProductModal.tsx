@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Button, Input, Modal, Select, Text, type ModalControls } from "@slauyama/ui";
+import {
+  Button,
+  Input,
+  Modal,
+  Select,
+  Text,
+  type ModalControls,
+} from "@slauyama/ui";
 import { ALL_BRANDS, Brand, Category } from "../../constants";
 import type { Product, ProductInput } from "../../hooks/useProducts";
 
@@ -46,7 +53,9 @@ export default function AddProductModal({
   const isEdit = !!initialValues;
 
   const [form, setForm] = useState<ProductInput>(
-    initialValues ? toInput(initialValues) : { ...BLANK, dateBought: new Date().toISOString().slice(0, 10) },
+    initialValues
+      ? toInput(initialValues)
+      : { ...BLANK, dateBought: new Date().toISOString().slice(0, 10) },
   );
   const [priceStr, setPriceStr] = useState<string>(
     initialValues?.price != null ? initialValues.price.toFixed(2) : "",
@@ -161,7 +170,7 @@ export default function AddProductModal({
           </div>
 
           <div>
-            <Text as="label" variant="label" className="block mb-1">
+            <Text as="label" size="sm" className="block mb-1">
               Notes
             </Text>
             <textarea
@@ -191,7 +200,7 @@ export default function AddProductModal({
 
           <div className="flex gap-3 pt-2">
             <Button
-              variant="secondary"
+              variant="ghost"
               type="button"
               onClick={modalControls.close}
               className="flex-1"

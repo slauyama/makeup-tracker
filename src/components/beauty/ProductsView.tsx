@@ -1,7 +1,14 @@
 import { useState } from "react";
 import { ProductStatus, ALL_CATEGORIES } from "../../constants";
 import type { Product, ProductInput } from "../../hooks/useProducts";
-import { Button, ChipGroup, IconButton, Select, Text, useModal } from "@slauyama/ui";
+import {
+  Button,
+  ChipGroup,
+  IconButton,
+  Select,
+  Text,
+  useModal,
+} from "@slauyama/ui";
 import AddProductModal from "./AddProductModal";
 import ProductCard from "./ProductCard";
 import ProductModal from "./ProductModal";
@@ -172,20 +179,16 @@ export default function ProductsView({
 
       {filtered.length === 0 ? (
         <div className="text-center py-20">
-          <Text variant="muted" as="p" className="text-5xl mb-3">
+          <Text as="p" className="text-5xl mb-3">
             💄
           </Text>
-          <Text
-            variant="body"
-            as="p"
-            className="text-lg font-medium text-zinc-500"
-          >
+          <Text as="p" className="text-lg font-medium text-zinc-500">
             {products.length === 0
               ? "No products yet"
               : "No products match these filters"}
           </Text>
           {products.length === 0 && (
-            <Text variant="muted" as="p" className="mt-1">
+            <Text as="p" className="mt-1">
               Hit{" "}
               <Button variant="inline" onClick={addProductModal.open}>
                 + Add Product

@@ -18,10 +18,10 @@ export default function ConfirmModal({
   return (
     <Modal modalControls={modalControls} title={title} closeOnBackdrop>
       <div className="p-6 flex flex-col gap-4">
-        <Text variant="body">{message}</Text>
+        <Text>{message}</Text>
         <div className="flex gap-3 pt-1">
           <Button
-            variant="secondary"
+            variant="ghost"
             onClick={modalControls.close}
             className="flex-1"
           >

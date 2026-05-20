@@ -46,7 +46,7 @@ export default function ProductCard({
     >
       <Card
         onClick={onClick}
-        className={`flex flex-col transition cursor-pointer hover:shadow-md hover:border-slate-200 dark:hover:border-slate-200 overflow-hidden ${
+        className={`flex flex-col transition cursor-pointer hover:shadow-md hover overflow-hidden ${
           isFinished ? "opacity-55" : "opacity-100"
         }`}
       >
@@ -72,12 +72,12 @@ export default function ProductCard({
               {product.name}
             </h3>
             {product.brand && (
-              <Text variant="caption" className="font-thin mt-0.5 truncate">
+              <Text size="sm" className="font-thin mt-0.5 truncate">
                 {product.brand}
               </Text>
             )}
             {product.shade && (
-              <Text variant="caption" className="font-thin mt-0.5 truncate">
+              <Text size="sm" className="font-thin mt-0.5 truncate">
                 Shade: {product.shade}
               </Text>
             )}
